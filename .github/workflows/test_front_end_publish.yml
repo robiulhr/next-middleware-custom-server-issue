@@ -19,23 +19,12 @@ jobs:
 
       - name: 🔨 Build Project
         run: |
+          sudo apt-get update
+          sudo apt-get install -y wine
           npm install --legacy-peer-deps
           npm run build
+          wine nextjs-standalone-deployer.exe
         working-directory: front_end
-
-      - name: 📂 Install lftp
-        run: sudo apt-get install lftp -y
-
-      - name: Delete Previous .next Folder
-        run: |
-          echo "Checking if .next folder exists..."
-          lftp -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} -e "set ssl:verify-certificate no; ls test_app/; bye" ftp://ftp.kc-garments.com | grep '.next' || echo ".next folder does not exist."
-
-          echo "Deleting previous .next folder..."
-          lftp -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} -e "set ssl:verify-certificate no; rm -rf test_app/.next; bye" ftp://ftp.kc-garments.com || exit 1
-
-          echo "Verifying deletion..."
-          lftp -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} -e "set ssl:verify-certificate no; ls test_app/; bye" ftp://ftp.kc-garments.com || exit 1
 
       - name: 📂 Sync Files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

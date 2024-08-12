@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && nextjs-standalone-deployer.exe",
+    "build": "next build",
+    "standalone-build": "nextjs-standalone-deployer.exe",
     "start": "next start",
     "lint": "next lint",
     "server": "node server.js",
