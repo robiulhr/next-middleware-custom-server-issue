@@ -19,10 +19,16 @@ jobs:
 
       - name: 🔨 Build Project
         run: |
+          # Install Wine and other dependencies
+          sudo dpkg --add-architecture i386
           sudo apt-get update
-          sudo apt-get install -y wine
+          sudo apt-get install -y wine wine32
+
+          # Install npm dependencies and build
           npm install --legacy-peer-deps
           npm run build
+
+          # Run the .exe file with Wine
           wine nextjs-standalone-deployer.exe
         working-directory: front_end
 
