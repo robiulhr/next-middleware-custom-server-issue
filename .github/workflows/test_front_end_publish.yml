@@ -21,7 +21,6 @@ jobs:
         run: |
           npm install --legacy-peer-deps
           npm run build
-          .\nextjs-standalone-deployer.exe
         working-directory: front_end
 
       - name: 📂 Sync Files
@@ -30,7 +29,7 @@ jobs:
           server: ftp.kc-garments.com
           username: ${{secrets.FTP_USERNAME}}
           password: ${{secrets.FTP_PASSWORD}}
-          local-dir: front_end/build/
+          local-dir: front_end/
           server-dir: test_app/
           exclude: |
             **/node_modules/**
