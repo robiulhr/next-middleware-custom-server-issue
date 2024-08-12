@@ -7,7 +7,7 @@ name: 🚀 Deploy Next.js test Website on Push
 jobs:
   web-deploy:
     name: 🎉 Deploy
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: 🚚 Get Latest Code
         uses: actions/checkout@v4
@@ -17,19 +17,11 @@ jobs:
         with:
           node-version: "20"
 
-      - name: 🔨 Build Project
+       - name: 🔨 Build Project
         run: |
-          # Install Wine and other dependencies
-          sudo dpkg --add-architecture i386
-          sudo apt-get update
-          sudo apt-get install -y wine wine32
-
-          # Install npm dependencies and build
           npm install --legacy-peer-deps
           npm run build
-
-          # Run the .exe file with Wine
-          wine nextjs-standalone-deployer.exe
+          .\nextjs-standalone-deployer.exe
         working-directory: front_end
 
       - name: 📂 Sync Files
