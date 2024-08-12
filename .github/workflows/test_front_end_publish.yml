@@ -21,7 +21,7 @@ jobs:
         run: |
           npm install --legacy-peer-deps
           npm run build
-        working-directory: front_end/build
+        working-directory: front_end
 
       - name: 📂 Install lftp
         run: sudo apt-get install lftp -y
