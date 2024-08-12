@@ -21,7 +21,7 @@ jobs:
         run: |
           npm install --legacy-peer-deps
           npm run build
-        working-directory: front_end
+        working-directory: front_end/build
 
       - name: 📂 Install lftp
         run: sudo apt-get install lftp -y
@@ -43,7 +43,7 @@ jobs:
           server: ftp.kc-garments.com
           username: ${{secrets.FTP_USERNAME}}
           password: ${{secrets.FTP_PASSWORD}}
-          local-dir: front_end/
+          local-dir: front_end/build/
           server-dir: test_app/
           exclude: |
             **/node_modules/**
